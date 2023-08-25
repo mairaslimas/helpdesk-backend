@@ -1,5 +1,9 @@
 package com.mairaslimas.helpdesk.resources.exceptions;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -9,10 +13,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.mairaslimas.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.mairaslimas.helpdesk.services.exceptions.ObjectNotFoundException;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ConstraintViolationException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
