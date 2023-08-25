@@ -11,6 +11,8 @@ import com.mairaslimas.helpdesk.services.exceptions.DataIntegrityViolationExcept
 import com.mairaslimas.helpdesk.services.exceptions.ObjectNotFoundException;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
@@ -47,4 +49,17 @@ public class ResourceExceptionHandler {
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
 	};
+	
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<ValidationError> constraintViolation(ConstraintViolationException ex,
+			HttpServletRequest request){
+		ValidationError errors = new ValidationError(System.currentTimeMillis(),HttpStatus.BAD_REQUEST.value(), 
+				"Constraint violation", "Valor inválido", request.getRequestURI());
+
+				for(ConstraintViolation<?> x : ex.getConstraintViolations()) {
+					errors.addError(x.getPropertyPath().toString(), x.getMessage());
+				}
+				
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+	}
 }
