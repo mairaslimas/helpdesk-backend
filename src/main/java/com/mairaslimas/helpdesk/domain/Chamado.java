@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.mairaslimas.helpdesk.domain.dtos.ChamadoDTO;
 import com.mairaslimas.helpdesk.domain.enums.Prioridade;
 import com.mairaslimas.helpdesk.domain.enums.Status;
 
@@ -14,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.Valid;
 
 @Entity
 public class Chamado implements Serializable {
@@ -53,6 +55,7 @@ public class Chamado implements Serializable {
 		this.tecnico = tecnico;
 		this.cliente = cliente;
 	}
+	
 	public Integer getId() {
 		return id;
 	}
